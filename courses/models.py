@@ -18,6 +18,10 @@ def get_statements_file_path(instance, filename):
     return 'course_{0}/{1}'.format(instance.course.label, filename)
 
 
+def get_page_file_path(instance, filename):
+    return 'page_{0}/{1}'.format(instance.page.label, filename)
+
+
 def get_blitz_statements_file_path(instance, filename):
     return 'course_{0}/{1}'.format(instance.contest.course.label, filename)
 
@@ -260,6 +264,12 @@ class Page(models.Model):
     content = models.TextField(blank=True)
     is_raw = models.BooleanField(default=False)
     course = models.ForeignKey(Course, related_name="pages", blank=True, on_delete=models.SET_NULL, null=True)
+
+
+class PageFile(models.Model):
+    page = models.ForeignKey(Page, related_name="files", on_delete=models.CASCADE)
+    title = models.TextField(blank=True)
+    file = models.FileField(upload_to=get_page_file_path)
 
 
 class StandingsSheetExport(models.Model):

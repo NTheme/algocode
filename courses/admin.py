@@ -272,6 +272,13 @@ class PageInline(admin.TabularInline):
     model = Page
 
 
+class PageFileInline(admin.TabularInline):
+    formfield_overrides = {
+        models.TextField: {'widget': Textarea(attrs={'rows': 1, 'cols': 40})},
+    }
+    model = PageFile
+
+
 class EjudgeRegisterApiGroupInline(admin.TabularInline):
     formfield_overrides = {
         models.TextField: {'widget': Textarea(attrs={'rows': 1, 'cols': 40})},
@@ -404,6 +411,7 @@ class StandingsAdmin(admin.ModelAdmin):
 @admin.register(Page)
 class PagesAdmin(admin.ModelAdmin):
     list_display = ['id', 'label', 'title', 'subtitle']
+    inlines = [PageFileInline]
 
 
 @admin.register(Teacher)
