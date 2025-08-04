@@ -30,5 +30,6 @@ urlpatterns = [
     path('form/export/json/<str:form_label>', FormJsonExport.as_view(), name='form_json_export'),
     path('form/export/csv/<str:form_label>', FormCSVExport.as_view(), name='form_csv_export'),
     path('form/<str:form_label>/', FormView.as_view(), name='form'),
+    path('form/submitted', FormSubmitted.as_view(), name='form_submitted'),
     path('<str:course_label>/', CourseView.as_view(), name='course'),
 ]

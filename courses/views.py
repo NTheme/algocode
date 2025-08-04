@@ -34,6 +34,8 @@ from ejudge_registration.ejudge_api_registration import EjudgeApiSession
 
 from ipware import get_client_ip
 
+import urllib.parse
+
 
 class MainView(View):
     def get(self, request, main_id=DEFAULT_MAIN):
@@ -545,7 +547,13 @@ class FormView(View):
                     connection=connection
                 ).send()
 
-        return HttpResponse(form.response_text.format(**result))
+        return redirect(reverse("form_submitted") + "?text=" + urllib.parse.quote(form.response_text.format(**result)))
+
+
+class FormSubmitted(View):
+    def get(self, request):
+        text = request.GET.get("text")
+        return HttpResponse(text)
 
 
 class FormDataView(View):
