@@ -308,6 +308,14 @@ class FormFieldSelectOptionInline(admin.TabularInline):
     model = FormFieldSelectOption
 
 
+class FormActionInline(admin.TabularInline):
+    formfield_overrides = {
+        models.TextField: {'widget': Textarea(attrs={'rows': 1, 'cols': 40})},
+    }
+    model = FormAction
+    extra = 0
+
+
 class FormExportInline(admin.TabularInline):
     formfield_overrides = {
         models.TextField: {'widget': Textarea(attrs={'rows': 1, 'cols': 40})},
@@ -467,7 +475,7 @@ class FormAdmin(admin.ModelAdmin):
     formfield_overrides = {
         models.TextField: {'widget': Textarea(attrs={'rows': 1, 'cols': 40})},
     }
-    inlines = [FormFieldInline, FormExportInline]
+    inlines = [FormFieldInline, FormActionInline, FormExportInline]
     list_display = ['id', 'label', 'title', 'subtitle']
 
 

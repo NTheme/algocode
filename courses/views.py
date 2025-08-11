@@ -20,6 +20,7 @@ from algocode.settings import EJUDGE_CONTROL, JUDGES_DIR, EJUDGE_URL, EJUDGE_AUT
     DEFAULT_PAGE
 from courses.judges.common_verdicts import EJUDGE_OK
 from courses.judges.pole_chudes import recalc_pole_chudes_standings
+from courses.lib.form.action import form_action
 from courses.lib.form.table import get_form_columns, get_form_entry_row
 from courses.lib.standings.standings_data import get_standings_data
 from courses.lib.participants_group.participants_group import get_participants_group
@@ -67,7 +68,6 @@ class CourseView(View):
 
         for contest in contests_list:
             if contest.enable_start_time and contest.start_time is not None:
-                print(datetime.datetime.now(tz=pytz.UTC), contest.start_time, datetime.datetime.now(tz=pytz.UTC) - contest.start_time)
                 if datetime.datetime.now(tz=pytz.UTC) < contest.start_time:
                     continue
             contests.append({
@@ -474,8 +474,6 @@ class FormView(View):
                 f['options'] = field.select_options.order_by("id")
             fields.append(f)
 
-        print(fields)
-
         return render(
             request,
             'form.html',
@@ -527,6 +525,9 @@ class FormView(View):
 
         entry = FormEntry.objects.create(form=form, data=json.dumps(result), mail=user_mail, ip=user_ip)
         entry.save()
+
+        for action in form.actions.all():
+            form_action(action, result)
 
         if form.send_mail and form.mail_auth:
             auth = form.mail_auth

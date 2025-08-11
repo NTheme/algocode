@@ -420,6 +420,13 @@ class FormEntry(models.Model):
     time = models.DateTimeField(auto_now_add=True)
 
 
+class FormAction(models.Model):
+    form = models.ForeignKey(FormBuilder, related_name="actions", on_delete=models.CASCADE)
+    url = models.TextField()
+    headers = models.TextField(blank=True, default="{}")
+    body = models.TextField(blank=True)
+
+
 class FormSheetsExport(models.Model):
     form = models.ForeignKey(FormBuilder, related_name="exports", on_delete=models.CASCADE)
     name = models.TextField(blank=True)
