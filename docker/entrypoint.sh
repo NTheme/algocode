@@ -1,9 +1,9 @@
 #!/bin/sh
 set -e
 
-python manage.py migrate --noinput
+python3 manage.py migrate --noinput
 
-python manage.py shell <<'PY'
+python3 manage.py shell <<'PY'
 import json, os
 from django.contrib.auth import get_user_model
 
