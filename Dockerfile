@@ -13,6 +13,7 @@ RUN pip install -U pip && pip install -r requirements.txt
 COPY . .
 
 RUN rm -rf .git
+RUN mv configs/config_example.json configs/config.json
 
 COPY docker/entrypoint.sh /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
