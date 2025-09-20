@@ -8,14 +8,14 @@ services:
     ports:
       - "127.0.0.1:8002:80"
     volumes:
-      - algocode_data:/app
+#      - algocode_data:/app
       - ejudge_data:/home/judges:ro
     networks: 
       - ejudge-net
 
 volumes:
-  algocode_data:
-    name: algocode_data
+#  algocode_data:
+#    name: algocode_data
 #    driver: local
 #    driver_opts:
 #      type: none
