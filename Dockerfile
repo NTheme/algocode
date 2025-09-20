@@ -1,8 +1,8 @@
-FROM python:slim AS dependencies
+FROM fedora:40 AS dependencies
 
-RUN apt update && apt install -y --no-install-recommends build-essential libpq-dev libmemcached-dev zlib1g-dev
+RUN dnf -y update && dnf -y install python3 python3-pip python3-devel gcc gcc-c++ make libmemcached-devel postgresql-devel zlib-devel
 
-RUN rm -rf /var/lib/apt/lists/*
+RUN dnf clean all
 
 FROM dependencies AS build
 
@@ -13,4 +13,4 @@ RUN /app/docker/build.sh
 
 COPY docker/entrypoint.sh /
 
-ENTRYPOINT ["/app/entrypoint.sh"]
+ENTRYPOINT ["/entrypoint.sh"]
