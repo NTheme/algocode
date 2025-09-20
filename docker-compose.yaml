@@ -1,0 +1,21 @@
+services:
+  algocode:
+    build: 
+      context: .
+    restart: always
+    image: algocode:latest
+    container_name: 'algocode'
+    ports:
+      - "127.0.0.1:8002:80"
+    volumes:
+      - ejudge_data:/home/judges:ro
+    networks: 
+      - ejudge-net
+
+volumes:
+  ejudge_data:
+    external: true
+
+networks:
+  ejudge-net:
+    external: true
