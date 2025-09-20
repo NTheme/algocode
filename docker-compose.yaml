@@ -1,5 +1,5 @@
 services:
-  mariadb:
+  memcached:
     restart: always
     image: "memcached"
     container_name: "memcached"
@@ -19,7 +19,7 @@ services:
       - ejudge_data:/home/judges:ro
     depends_on:
       - memcached
-    networks: 
+    networks:
       - ejudge-net
 
 volumes:
