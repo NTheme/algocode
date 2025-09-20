@@ -1,4 +1,11 @@
 services:
+  mariadb:
+    restart: always
+    image: "memcached"
+    container_name: "memcached"
+    networks:
+      - ejudge-net
+
   algocode:
     build: 
       context: .
@@ -10,6 +17,8 @@ services:
     volumes:
 #      - algocode_data:/app
       - ejudge_data:/home/judges:ro
+    depends_on:
+      - memcached
     networks: 
       - ejudge-net
 
