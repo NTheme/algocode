@@ -1,21 +1,14 @@
-FROM python:slim
+FROM python:slim AS dependencies
+
+RUN apt update && apt install -y --no-install-recommends build-essential libpq-dev libmemcached-dev zlib1g-dev
+
+RUN rm -rf /var/lib/apt/lists/*
+
+FROM dependencies AS build
 
 WORKDIR /app
-ENV PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1
+COPY . /app
 
-RUN apt update && \
-    apt install -y --no-install-recommends build-essential libpq-dev libmemcached-dev zlib1g-dev && \
-    rm -rf /var/lib/apt/lists/*
+RUN /app/docker/build.sh
 
-COPY requirements.txt .
-RUN pip install -U pip && pip install -r requirements.txt
-
-COPY . .
-
-RUN rm -rf .git
-RUN mv configs/config_example.json configs/config.json
-
-COPY docker/entrypoint.sh /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
-
-CMD ["python", "manage.py", "runserver", "0.0.0.0:80"]
