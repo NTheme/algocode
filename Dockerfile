@@ -11,4 +11,6 @@ COPY . /app
 
 RUN /app/docker/build.sh
 
-ENTRYPOINT ["/entrypoint.sh"]
+COPY docker/entrypoint.sh /
+
+ENTRYPOINT ["/app/entrypoint.sh"]
