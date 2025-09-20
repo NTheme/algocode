@@ -4,7 +4,7 @@ WORKDIR /app
 ENV PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1
 
 RUN apt update && \
-    apt install -y --no-install-recommends build-essential libpq-dev libmemcached-dev && \
+    apt install -y --no-install-recommends build-essential libpq-dev libmemcached-dev zlib1g-dev && \
     rm -rf /var/lib/apt/lists/*
 
 COPY requirements.txt .
