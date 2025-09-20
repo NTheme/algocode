@@ -24,4 +24,4 @@ if created:
     u.save()
 PY
 
-python manage.py runserver 0.0.0.0:80
+python3 manage.py runserver 0.0.0.0:80
