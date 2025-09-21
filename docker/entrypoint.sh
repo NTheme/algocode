@@ -11,12 +11,11 @@ cfg = json.load(open("/app/configs/config.json"))
 su = cfg.get("secrets", {}).get("ejudge", {})
 username = su.get("login", "admin")
 password = su.get("password", "admin")
-email = su.get("email", "admin")
 
 User = get_user_model()
 u, created = User.objects.get_or_create(
     username=username,
-    defaults={"email": email, "is_staff": True, "is_superuser": True}
+    defaults={"is_staff": True, "is_superuser": True}
 )
 
 if created:
