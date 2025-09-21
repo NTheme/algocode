@@ -19,7 +19,7 @@
 
     <div class="sidebar">
         {% if links %}
-            <h3>Полезные ссылки</h3>
+            <h3>Useful links</h3>
             {% for link in links %}
                 {% if link.file %}
                     <a href="{{ link.file.url }}" {% if link.new_tab %}target="_blank"{% endif %}>{{ link.text }}</a><br>
@@ -31,7 +31,7 @@
             {% endfor %}
         {% endif %}
         {% if teachers %}
-            <h3>Преподаватели</h3>
+            <h3>Teachers</h3>
             {% for teacher in teachers %}
                 {% if teacher.teacher.photo %}
                     <img class="photo" src="{{ teacher.teacher.photo.url }}" alt="{{ teacher.teacher.name }}"><br>
@@ -44,7 +44,7 @@
                     <br>Telegram: <a href="tg://resolve?domain={{ teacher.teacher.telegram_id }}">@{{ teacher.teacher.telegram_id }}</a>
                 {% endif %}
                 {% if teacher.teacher.vk_id %}
-                    <br><a href="https://vk.com/{{ teacher.teacher.vk_id }}">ВКонтакте</a>
+                    <br><a href="https://vk.com/{{ teacher.teacher.vk_id }}">VK</a>
                 {% endif %}
                 <br><br>
             {% endfor %}
@@ -85,25 +85,25 @@
 
                 {% if contest.contest.contest_id or contest.contest.other_lin or contest.contest.judge == 'PC' %}
                     <div class="contest_name">
-                    Контест
+                    Contest
                     </div>
                     <div class="contest_link">
                         {% if contest.contest.other_link %}
-                            <a href="{{ contest.contest.other_link }}">Вход</a>
+                            <a href="{{ contest.contest.other_link }}"> Log in</a>
                         {% elif contest.contest.judge == 'EJ' or contest.contest.judge == 'EC' %}
-                            <a href="{{ ejudge_url }}{{ contest.contest.contest_id }}">Вход</a>
+                            <a href="{{ ejudge_url }}{{ contest.contest.contest_id }}">Log in</a>
                         {% elif contest.contest.judge == 'CF' %}
-                            <a href="{{ course.codeforces_url }}/group/{{ contest.contest.external_group_id }}/contest/{{ contest.contest.contest_id }}">Вход</a>
+                            <a href="{{ course.codeforces_url }}/group/{{ contest.contest.external_group_id }}/contest/{{ contest.contest.contest_id }}">Log in</a>
                         {% elif contest.contest.judge == 'IN' %}
-                            <a href="https://informatics.mccme.ru/mod/statements/view.php?id={{ contest.contest.contest_id }}">Вход</a>
+                            <a href="https://informatics.mccme.ru/mod/statements/view.php?id={{ contest.contest.contest_id }}">Log in</a>
                         {% elif contest.contest.judge == 'PC' %}
-                            <a href="{{ course.pcms_url }}">Вход</a>
+                            <a href="{{ course.pcms_url }}">Log in</a>
                         {% endif %}
                     </div>
                 {% endif %}
                 <div class="contest_link">
                     {% if contest.contest.show_statements and contest.contest.statements %}
-                        <a href="{{ contest.contest.statements.url }}">Условия</a>
+                        <a href="{{ contest.contest.statements.url }}">Statements</a>
                     {% endif %}
                 </div>
             </div>

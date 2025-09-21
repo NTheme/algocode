@@ -10,6 +10,8 @@ services:
     container_name: "mongo"
     ports:
       - "127.0.0.1:27018:27017"
+    volumes:
+      - mongo_data:/data/db
     networks:
       - ejudge_net
 
@@ -23,6 +25,7 @@ services:
       - "127.0.0.1:8002:80"
     volumes:
       - ejudge_data:/home/judges
+      - algocode_data:/home/algocode
     depends_on:
       - memcached
       - mongo
@@ -32,6 +35,18 @@ services:
 volumes:
   ejudge_data:
     name: ejudge_data
+  mongo_data:
+    name: mongo_data
+    driver_opts:
+      type: none
+      o: bind
+      device: ${HOME}/data/mongo
+  algocode_data:
+    name: algocode_data
+    driver_opts:
+      type: none
+      o: bind
+      device: ${HOME}/data/algocode
 
 networks:
   ejudge_net:

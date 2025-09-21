@@ -7,13 +7,13 @@
 <body>
 <form method="post" action="{% url 'restart_ejudge' %}">
     {% csrf_token %}
-    <input type="submit" value="Перезапустить ejudge">
+    <input type="submit" value="Restart ejudge">
 </form>
 <form method="post" action="{% url 'create_valuer' %}">
     {% csrf_token %}
-    <p>id контеста</p>
+    <p>Contest id</p>
     <input type="number" name="contest_id">
-    <input type="submit" value="создать valuer">
+    <input type="submit" value="Create valuer">
 </form>
 
 </body>

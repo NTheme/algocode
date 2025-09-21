@@ -8,22 +8,22 @@
     <link rel="stylesheet" type="text/css" href="{% static 'blitz_style.css' %}">
 </head>
 <body>
-<h1>Просмотр блитца</h1>
+<h1>Viewing the blitz</h1>
 <p>
-    Вам не показаны условия задач.
-    Вы можете открыть условие любой задачи и в течении 5 минут сделать ставку на то, сколько времени вы потратите на её решение.
-    Если вы не решите задачу в поставленное вами время, то она не будет защитанна.
-    Иначе вам будет выставлен некоторый балл, зависящий от вашей ставки и числа людей, сдавших задачу.
+    You are not shown the task conditions.
+    You can open a condition for any task and within 5 minutes place a bet on how much time you will spend on solving it.
+    If you do not complete the task in the time you set, it will not be counted.
+    Otherwise, you will be awarded a certain score, depending on your bid and the number of people who completed the task.
 </p>
 <table>
     <tbody>
     <tr>
-        <td>Задача</td>
-        <td>Описание</td>
-        <td>Количество взявшихся</td>
-        <td>Условие</td>
-        <td>Ставка</td>
-        <td>Осталось ставки</td>
+        <td>Problem</td>
+        <td>Description</td>
+        <td>Number of takers</td>
+        <td>Statement</td>
+        <td>Bet</td>
+        <td>The remaining bids</td>
     </tr>
     {% for problem in problems %}
         <tr>
@@ -32,7 +32,7 @@
         <td>{{ problem.starts_number }}</td>
         <td>
         {% if problem.started %}
-            <a href="{{ problem.problem.statements.url }}">Условия</a>
+            <a href="{{ problem.problem.statements.url }}">Statements</a>
         {% else %}
             <form action="{% url 'blitz_open_problem' problem_id=problem.problem.id %}" method="post">
                 {% csrf_token %}
@@ -45,13 +45,13 @@
             {% if problem.bid_time_left > 0 %}
                 <form action="{% url 'blitz_make_bid' problem_id=problem.problem.id %}" method="post">
                     {% csrf_token %}
-                    <label for="{{ problem.problem.id }}_bid">Текущая ставка: </label>
-                    <input id="{{ problem.problem.id }}_bid" type="number" name="bid" value={{ problem.bid }}> минут
+                    <label for="{{ problem.problem.id }}_bid">Current bid: </label>
+                    <input id="{{ problem.problem.id }}_bid" type="number" name="bid" value={{ problem.bid }}> minutes
                     <input type="submit" value="Изменить">
                 </form>
-                У вас осталось {{ problem.bid_time_left }} секунд на изменение.
+                You are left with {{ problem.bid_time_left }} seconds for the change.
             {% else %}
-                {{ problem.bid }} минут
+                {{ problem.bid }} minutes
             {% endif %}
         {% else %}
             -
@@ -59,7 +59,7 @@
         </td>
         <td>
         {% if problem.started %}
-            {{ problem.bid_left }} минут
+            {{ problem.bid_left }} minutes
         {% else %}
             -
         {% endif %}

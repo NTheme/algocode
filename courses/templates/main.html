@@ -20,7 +20,10 @@
 
     {% if links %}
     <div class="sidebar">
-        <h3>Полезная информация</h3>
+        <h3>Useful links</h3>
+        <a href="/page/main" >Back</a><br>
+        <a href="" >&nbsp;</a><br>
+        <a href="/page/about/" ><b>About</b></a><br>
         {% for link in links %}
             {% if link.file %}
                 <a href="{{ link.file.url }}" {% if link.new_tab %}target="_blank"{% endif %}>{{ link.text }}</a><br>

@@ -7,42 +7,42 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300" rel="stylesheet">
     <meta http-equiv="content-language" content="ru-ru">
     <link rel="stylesheet" href="{% static 'pole_chudes.css' %}">
-    <title>Поле чудес</title>
+    <title>Field of Miracles</title>
 </head>
 <body>
 
 <h1 class="header">
-    Команда: {{ team.name }}
+    Team: {{ team.name }}
 </h1>
 
 <h3>
     {{ team.players }}
 </h3>
 
-<p>Общий балл: {{ team.score }}</p>
-<p>Слов угадано: {{ team.word_id }}</p>
-<p>Неудачных попыток: {{ team.unsuccess }}</p>
-<p>Задач сдано: {{ team.problems }}</p>
+<p>Total score: {{ team.score }}</p>
+<p>Guessed: {{ team.word_id }}</p>
+<p>Unsuccessful attempts: {{ team.unsuccess }}</p>
+<p>Tasks completed: {{ team.problems }}</p>
 {% if team.coins > 0 %}
-<p>Коинов потрачено: {{ team.coins }}</p>
+<p>Coins spent: {{ team.coins }}</p>
 {% endif %}
 
-<h2><a href="{% url 'pole_chudes' game_id=team.game.id %}">Таблица результатов</a></h2>
+<h2><a href="{% url 'pole_chudes' game_id=team.game.id %}">Results table</a></h2>
 
 <h3>
-    Таблица
+    Table
 </h3>
 <table class="standings">
 <tr>
-    <td class="name stitle">Буква алфавита</td>
+    <td class="name stitle">Letter of the alphabet</td>
     {% for i in team.game.alphabet %}
-    <td class="problem stitle" title="Буква {{ i }}">{{ i }}</td>
+    <td class="problem stitle" title="Letter {{ i }}">{{ i }}</td>
     {% endfor %}
 </tr>
 <tr>
-    <td class="name stitle">Задача в контесте</td>
+    <td class="name stitle">The problem in the contest</td>
     {% for i in prob_letters %}
-        <td class="problem stitle" title="Задача {{ i }}">{{ i }}</td>
+        <td class="problem stitle" title="Problem {{ i }}">{{ i }}</td>
     {% endfor %}
 </tr>
 {% for row in standings %}
@@ -62,14 +62,14 @@
 </table>
 
 <h1>
-    Слова
+    Words
 </h1>
 
 {% for word in words %}
-<h3>Слово {{ word.id }} <span class="word_title">({% if word.guessed %}угадано{% else %}не угадано{% endif %})</span></h3>
+<h3>The word {{ word.id }} is <span class="word_title">({% if word.guessed %}guessed{% else %}not guessed{% endif %})</span></h3>
 <div style="margin-left: 20px">
     <p>
-        Подсказка: {{ word.hint }}
+        Hint: {{ word.hint }}
     </p>
     <table class="word">
         <tr>
@@ -84,7 +84,7 @@
         {% endfor %}
         </tr>
     </table>
-    <p>Буквы</p>
+    <p>Letters</p>
     <table>
     <tr>
         {% for letter in word.alphabet %}
@@ -101,7 +101,7 @@
 
     {% if word.unsuccess %}
     <h4 class="unsuccess">
-        Неудачные попытки:
+        Unsuccessful attempts:
     </h4>
     {% for guess in word.unsuccess %}
         <p class="unsuccess">{{ guess }}</p>
@@ -109,11 +109,11 @@
     {% endif %}
 
     {% if not word.guessed %}
-        <h3>Попробовать угадать слово:</h3>
+        <h3>Try to guess the word:</h3>
         <form action="{% url 'pole_chudes_team_guess' team_id=team.id %}" method="post">
             {% csrf_token %}
-            <input type="text" id="word" name="word" placeholder="Введите слово">
-            <input type="submit" value="Угадать">
+            <input type="text" id="word" name="word" placeholder="Enter the word">
+            <input type="submit" value="Guess">
         </form>
     {% endif %}
 </div>

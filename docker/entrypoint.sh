@@ -1,12 +1,16 @@
 #!/bin/sh
 
+if [ ! -e /home/algocode/config.json ]; then
+    cp configs/config_example.json /home/algocode/config.json
+fi
+
 python3 manage.py migrate --noinput
 
 python3 manage.py shell <<'PY'
 import json, os
 from django.contrib.auth import get_user_model
 
-cfg = json.load(open("/app/configs/config.json"))
+cfg = json.load(open("/home/algocode/config.json"))
 su = cfg.get("secrets", {}).get("ejudge", {})
 username = su.get("login", "admin")
 password = su.get("password", "admin")

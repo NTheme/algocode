@@ -7,7 +7,7 @@
 
     <meta http-equiv="content-language" content="ru-ru">
     <link rel="stylesheet" href="{% static 'battleship_style.css' %}">
-    <title>Морской бой</title>
+    <title>Battleship</title>
     <style>
         td.broken {
             background-image: url({% static 'battleship/broken.png' %});
@@ -63,35 +63,35 @@
             </tbody>
         </table>
         <ul>
-            <li>Итоговый балл: {{ field.score }}</li>
-            <li>Успешные попытки: {{ field.success }}</li>
+            <li>Total score: {{ field.score }}</li>
+            <li>Successful attempts: {{ field.success }}</li>
             <ul>
-                <li>из них в цель: {{ field.ship_success }}</li>
-                <li>из них мимо: {{ field.ship_fail }}</li>
+                <li>From them to the target: {{ field.ship_success }}</li>
+                <li>From them missed: {{ field.ship_fail }}</li>
             </ul>
-            <li>Безуспешные попытки: {{ field.fail }}</li>
+            <li>Unsuccessful attempts: {{ field.fail }}</li>
         </ul>
     </div>
     {% endfor %}
 
     <div class="results">
-        <p class="team_header">Легенда</p>
+        <p class="team_header">Legend</p>
         <table>
             <tbody>
             <tr>
-                <td class="map_cell unknown"></td><td>Клетка, по которой не стреляли</td>
+                <td class="map_cell unknown"></td><td>The cage that wasn't shot at</td>
             </tr>
             <tr>
                 <td class="map_cell unsuccess"></td>
-                <td>Клетка, по которой безуспешно пытались стрелять</td>
+                <td>The cage that they tried unsuccessfully to shoot at</td>
             </tr>
             <tr>
                 <td class="map_cell empty"></td>
-                <td>"Мимо"</td>
+                <td>"Missed"</td>
             </tr>
             <tr>
                 <td class="map_cell broken"></td>
-                <td>"Ранен/убит"</td>
+                <td>"Wounded/killed"</td>
             </tr>
             </tbody>
         </table>
