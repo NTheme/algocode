@@ -18,8 +18,8 @@
     </header>
 
     <div class="sidebar">
+        <h3>Useful links</h3>
         {% if links %}
-            <h3>Useful links</h3>
             {% for link in links %}
                 {% if link.file %}
                     <a href="{{ link.file.url }}" {% if link.new_tab %}target="_blank"{% endif %}>{{ link.text }}</a><br>
@@ -29,7 +29,10 @@
                     {{ link.text }}<br>
                 {% endif %}
             {% endfor %}
+            <a href="" >&nbsp;</a><br>
         {% endif %}
+        <a href="/page/main" >To the top</a><br>
+        <a href="/page/about/" ><b>About</b></a><br>
         {% if teachers %}
             <h3>Teachers</h3>
             {% for teacher in teachers %}
