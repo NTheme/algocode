@@ -6,6 +6,15 @@ services:
     networks:
       - ejudge-net
 
+  mongo:
+    restart: always
+    image: "mongo"
+    container_name: "mongo"
+    ports:
+      - "127.0.0.1:27018:27017"
+    networks:
+      - ejudge-net
+
   algocode:
     build: 
       context: .
@@ -15,21 +24,14 @@ services:
     ports:
       - "127.0.0.1:8002:80"
     volumes:
-#      - algocode_data:/app
       - ejudge_data:/home/judges:ro
     depends_on:
       - memcached
+      - mongo
     networks:
       - ejudge-net
 
 volumes:
-#  algocode_data:
-#    name: algocode_data
-#    driver: local
-#    driver_opts:
-#      type: none
-#      o: bind
-#      device: /home/ejudge/data/algocode
   ejudge_data:
     external: true
 
