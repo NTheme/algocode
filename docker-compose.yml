@@ -13,14 +13,14 @@ services:
     ports:
       - "127.0.0.1:27018:27017"
     networks:
-      - ejudge-net
+      - ejudge_net
 
   algocode:
     build: 
       context: .
     restart: always
-    image: algocode:latest
-    container_name: 'algocode'
+    image: "algocode:latest"
+    container_name: "algocode"
     ports:
       - "127.0.0.1:8002:80"
     volumes:
@@ -29,12 +29,12 @@ services:
       - memcached
       - mongo
     networks:
-      - ejudge-net
+      - ejudge_net
 
 volumes:
   ejudge_data:
-    external: true
+    name: ejudge_data
 
 networks:
-  ejudge-net:
-    external: true
+  ejudge_net:
+    name: ejudge_net
