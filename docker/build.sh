@@ -12,7 +12,7 @@ RELEASE='RELEASE=1'
 rm -rf .git
 sed -i "s|MemcachedCache|PyMemcacheCache|" /app/configs/config_example.json
 sed -i "s|127.0.0.1:11211|memcached:11211|" /app/configs/config_example.json
-sed -i "s|"connection_string": ""|"connection_string": "127.0.0.1:27017"|"
+sed -i "s|"connection_string": ""|"connection_string": "127.0.0.1:27017"|" /app/configs/config_example.json
 sed -i "s|http://some_ejudge_url.com|http://ejudge-net|" /app/configs/config_example.json
 sed -i "s|ejudge_admin_login|ejudge|" /app/configs/config_example.json
 sed -i "s|ejudge_admin_password|ejudge|" /app/configs/config_example.json
