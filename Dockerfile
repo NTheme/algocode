@@ -8,7 +8,7 @@ FROM dependencies AS build
 
 WORKDIR /app
 COPY . /app
-RUN sed -i "s|127.0.0.1:11211|memcached:11211|" /app/configs/config_example.json && sed -i "s|MemcachedCache|PyMemcacheCache|" /app/configs/config_example.json
+
 RUN /app/docker/build.sh
 
 COPY docker/entrypoint.sh /
