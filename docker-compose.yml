@@ -3,8 +3,6 @@ services:
     restart: always
     image: "memcached"
     container_name: "memcached"
-    networks:
-      - ejudge_net
 
   mongo:
     restart: always
